@@ -1,0 +1,38 @@
+
+<h2 class="text-white text-opacity-25  bg-secondary p-2">App de tareas</h2>
+<div class="d-flex mt-5 w-100 justify-content-center">
+    <div class="bg-white w-25 h-25 border border-secondary p-2 mb-2 border-opacity-10 rounded-1">
+        <form #formTareas="ngForm" (ngSubmit)="crearTarea(formTareas)" class="d-flex flex-column p-3">
+            <input type="hidden" name="_id" placeholder="id" [(ngModel)]="servicio.datosTarea._id">
+            <input class="border rounded-2 p-1" type="text" name='tipo' placeholder="Titulo" [(ngModel)]="servicio.datosTarea.tipo">
+            <input class="mt-2 border rounded-2 p-1"type="text" name="autor" placeholder="Autor" [(ngModel)]="servicio.datosTarea.autor">
+            <input class="mt-2 border rounded-2 p-1" type="text" name="mensaje" placeholder="Mensaje" [(ngModel)]="servicio.datosTarea.mensaje">
+            <select class="mt-2 p-1" name="urgencia" [(ngModel)]="servicio.datosTarea.urgencia">
+                <option value="tiempo">Tiempo</option>
+                <option value="medio_tiempo">Medio tiempo</option>
+                <option value="mas_rapido">Mas Rapido</option>
+                <option value="rapido">Rapido</option>
+            </select>
+            <input class="border rounded-2 mt-2 p-1" type="time" name="fechaFinal" placeholder="Fecha final" [(ngModel)]="servicio.datosTarea.fechaFinal">
+            <button type="submit" class="bg-primary text-white border border-white rounded-3 mt-4 p-2">Guardar</button>
+        </form>
+    </div>
+    <ul style="list-style: none;" class="w-50">
+        <li class="border rounded-3 border-1 p-3" *ngFor="let ta of servicio.tareas"> 
+                <h3 (click)="acordion(parrafo)">{{ta.tipo}}</h3>
+                <p class="badge bg-primary text-white">{{ta.fecha}}</p>
+                <div #parrafo >
+                    <div class="d-flex flex-column" >
+                        <!-- <p><strong>Tipo: </strong>{{ta.tipo}}</p> -->
+                        <p><strong>Autor: </strong>{{ta.autor}}</p>
+                        <p><strong>Mensaje: </strong>{{ta.mensaje}}</p>
+                        <p><strong>Urgencia: </strong>{{ta.urgencia}}</p>
+                        <p><strong>Fecha Final: </strong>{{ta.fechaFinal}}</p>
+                    </div>
+                    <button type="button" class="bg-danger text-white border border-white rounded-3 p-1" (click)="eliminarTarea(ta._id)">Eliminar</button>
+                    <button type="button" class="bg-info text-white border border-white rounded-3 p-1" (click)="editarTarea(ta)">Editar</button>
+                </div>
+                <!-- <button  (click)="acordion()">vermas</button> -->
+        </li>
+    </ul>
+</div>
